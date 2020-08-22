@@ -1,17 +1,17 @@
 <div class="pegination">
     <div class="nav-links">
         {% if page_obj.has_previous %}
-        <a class="page-numbers" href="?page={{page_obj.previous_page_number}}"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+        <a class="page-numbers" href="?{{ s }}page={{page_obj.previous_page_number}}"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
         {% endif %}
         {% for i in page_obj.paginator.page_range %}
             {% if page_obj.number == i %}
             <span class="page-numbers current">{{ i }}</span>
             {% elif i > page_obj.number|add:-3 and i < page_obj.number|add:3 %}
-            <a class="page-numbers" href="?page={{ i }}">{{ i }}</a>
+            <a class="page-numbers" href="?{{ s }}page={{ i }}">{{ i }}</a>
             {% endif %}
         {% endfor %}
         {% if page_obj.has_next %}
-        <a class="page-numbers" href="?page={{page_obj.next_page_number}}"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+        <a class="page-numbers" href="?{{ s }}page={{page_obj.next_page_number}}"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
         {% endif %}
 
     </div>

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Search
+{% endblock %}
+
+{% block content %}
+
+<section class="blog-post-area">
+    <div class="container">
+        <div class="row">
+            <div class="blog-post-area-style">
+                <div style="border: 1px solid #000"></div>
+                <section class="single-blog-area">
+                <div class="newsletter">
+                    <h2 class="sidebar-title">Search</h2>
+                    <form action="{% url 'search' %}" method="get">
+                        <input type="text" name="s" placeholder="search...">
+                        <input type="submit" value="Search">
+                    </form>
+                </div>
+                </section>
+                {% for i in posts %}
+                <div class="col-md-3">
+                    <div class="single-post">
+                        {% if i.photo %}
+                        <img src="{{ i.photo.url }}" alt="{{ i.title }}">
+                        {% else %}
+                        <img src="https://picsum.photos/id/237/300/201" alt="{{ i.title }}">
+                        {% endif %}
+                        <h3><a href="{{ i.get_absolute_url }}">{{ i.title }}</a></h3>
+                        <h4><span>Posted By: <span class="author-name">{{ i.author }}</span></span>
+                        </h4>
+                        <p>{{ i.content|safe|linebreaks|truncatewords:20 }}</p>
+                        <h4><span>{{ i.created_at }}</span></h4>
+                    </div>
+                </div>
+                {% empty %}
+                <h2>Ничего не найдено!</h2>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {% if page_obj.has_other_pages %}
+
+    {% include 'inc/_pagination.html' %}
+
+    {% endif %}
+
+</section>
+
+{% endblock %}
